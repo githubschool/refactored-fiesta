@@ -9,7 +9,5 @@
   - Bowling
   - Walk on the park
   - Celebrate parties
-  #### Next level
-    - 123
-    - 456
-    -123
+
+### Newly added

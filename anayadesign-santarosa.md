@@ -9,3 +9,6 @@
 - Hike around Spring Lake
 - Snoopy's Home Ice
 - Third street aleworks
+
+### Convenience stores
+- Daiso

@@ -6,3 +6,5 @@
 ## Eat
 - [Benchmark](https://benchmarkpizzeria.com)
 - [Comal](http://www.comalberkeley.com)
+## Play
+-- [Cycling](https://cycling.berkeley.edu/routes/)

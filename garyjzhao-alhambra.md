@@ -5,3 +5,5 @@
 - Burger King
 
 ### Things to do
+- Eat at the Restaurants above
+

@@ -5,3 +5,4 @@
 
 Simply Thai
 Olive garden
+Salah Thai

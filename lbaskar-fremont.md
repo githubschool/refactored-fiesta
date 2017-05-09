@@ -1,11 +1,14 @@
 # Fremont, CA
 
 ### Tech companies
- - ABC
- - XYZ
+ - ABC Inc.,
+ - XYZ Manufacturing.
 
 ### Things to Do
   - City Sports Gym
   - Bowling
-  - Some activities you like
-  - change
+  - Walk on the park
+  - Celebrate parties
+  #### Next level
+    - 123
+    - 456

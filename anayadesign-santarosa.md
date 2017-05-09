@@ -8,3 +8,4 @@
 ### Things to do
 - Hike around Spring Lake
 - Snoopy's Home Ice
+- Third street aleworks

@@ -6,5 +6,4 @@
 
 ### Places to Visit
 - APs home
-- Frmont Blvd
 ```

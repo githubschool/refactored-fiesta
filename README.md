@@ -3,7 +3,6 @@
 - Class Date: May 9-10, 2017
 - Facilitators:
   - @hectorsector :microphone:
-  - @hectorsector :speech_balloon:
 
 ## Talk to Us!!
 
@@ -21,7 +20,7 @@ Please take a moment to complete the class survey at: https://goo.gl/ruVsoo.
 ## Resources
 
 - [GitHub for Developers Manual](https://github.github.io/training-manual/)
-- [Git Cheat Sheets](https://services.github.com/resources/)
+- [Git Cheat Sheets](https://services.github.com/resources/cheatsheets/)
 - [Review videos](https://www.youtube.com/playlist?list=PLg7s6cbtAD16Pgp6WIVfX4VsGI-xyWkMz)
 - [Introduction to GitHub Flow](https://guides.github.com/introduction/flow/)
 - [Authentication Troubleshooting Guide](https://help.github.com/categories/authenticating-to-github/)

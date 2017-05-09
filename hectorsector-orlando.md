@@ -6,3 +6,7 @@
 - The Pharmacy
 
 ### Things to Do
+
+- Disney World
+- Universal Studios Orlando
+- Lake Eola in Downtown Orlando

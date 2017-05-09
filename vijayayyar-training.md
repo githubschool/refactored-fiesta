@@ -1,4 +1,4 @@
-# vijayayyar-training
+# vijayayyar-lasvegas
 
 ### Restaurants
 
@@ -7,3 +7,4 @@
 ### Pharmacy
 
 -- Walgreens
+-- CVS

@@ -17,3 +17,4 @@
 - library
 - Taj Mahal
 - My house
+- parks

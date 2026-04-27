@@ -3,8 +3,8 @@ info:
   title: Purpose Fintech API
   description: Complete API reference for the Purpose Fintech Payments platform.
   version: '1.0'
-  x-release-date: '2026-04-27 10:49 PT'
-  x-build: 'Build 20.22'
+  x-release-date: '2026-04-27 PT'
+  x-build: 'Build 20.21'
   x-build-summary: 'v20.21 — Restoration build. Rebased from the true v20.18 baseline (Exceptions entity with assigneeRole + notes endpoint, Batch entity, initiate* action naming, plural paths, PATCH-only mutations all intact). Re-applied the v20.19 error envelope sweep: all 342 non-2xx responses converted to status: FAILURE + errors[] array + traceId; ErrorItem schema added with ERR-### opaque code pattern and optional id/externalReferenceId for 409 conflicts; ErrorEnvelope schema rebuilt; legacy status: ERROR and singular error: blocks fully eliminated; Error Sample Pairing Rule enforced (ERR-### paired with <error message> placeholders, 341/341). Re-applied the v20.20 fee read consolidation: GET /enrollments/{enrollmentId}/fees/{feeId} retained on the unified Fee tag, GET /enrollments/{enrollmentId}/fees replaced with POST /enrollments/{enrollmentId}/fees/list (per project list-endpoint convention), source field distinguishes SUBSCRIBER vs PURPOSE pathways, both parties see each other''s fees. Subscriber/Purpose Fee tags retain their Create/Update/Cancel/Suspend/Reinstate pathways with no duplicate Get/List. Fixed two stragglers where initiate*Cancellation on subscriber/purpose fees were declared as PUT — corrected to POST per the initiate* convention. Exception object redesign remains parked for a later build.'
   contact:
     name: PFT Support
@@ -309,8 +309,8 @@ paths:
               example:
                 status: FAILURE
                 errors:
-                - code: ERR-83
-                  message: "A consumer with same external reference id already exists"
+                - code: ERR-###
+                  message: <error message>
                 traceId: f99445b7-01c1-4766-9044-249f904d5163
       requestBody:
         required: true
@@ -970,8 +970,8 @@ paths:
               example:
                 status: FAILURE
                 errors:
-                - code: ERR-06
-                  message: "A consumer with this email already exists."
+                - code: ERR-###
+                  message: <error message>
                 traceId: c6c6e555-c2d1-4ae6-93a7-e80a285b6f7f
       requestBody:
         required: true
@@ -1722,8 +1722,8 @@ paths:
               example:
                 status: FAILURE
                 errors:
-                - code: ERR-17
-                  message: "Only one address of each type allowed per consumer."
+                - code: ERR-###
+                  message: <error message>
                 traceId: 1f56ccde-ea95-4187-9876-60e559626fd3
       parameters:
         - name: consumerId
@@ -2142,8 +2142,8 @@ paths:
               example:
                 status: FAILURE
                 errors:
-                - code: ERR-17
-                  message: "Only one address of each type allowed per consumer."
+                - code: ERR-###
+                  message: <error message>
                 traceId: 28e6b12a-3559-46cd-9f4c-99d9c32c2e76
       parameters:
         - name: consumerId
@@ -2688,8 +2688,8 @@ paths:
               example:
                 status: FAILURE
                 errors:
-                - code: ERR-155
-                  message: "A bank account with same external reference id already exists."
+                - code: ERR-###
+                  message: <error message>
                 traceId: ded4934a-02b6-4f18-929c-43347c04cb3a
       parameters:
         - name: consumerId
@@ -3192,8 +3192,8 @@ paths:
               example:
                 status: FAILURE
                 errors:
-                - code: ERR-155
-                  message: "A bank account with same external reference id already exists."
+                - code: ERR-###
+                  message: <error message>
                 traceId: aa4d2036-b268-440f-9aac-f44e1c234989
       parameters:
         - name: consumerId
@@ -4367,8 +4367,8 @@ paths:
               example:
                 status: FAILURE
                 errors:
-                - code: ERR-156
-                  message: "A creditor with same external reference id already exists"
+                - code: ERR-###
+                  message: <error message>
                 traceId: dd64625f-e401-466b-98f4-3192b869f99f
       parameters:
         - name: creditorId
@@ -4735,8 +4735,8 @@ paths:
               example:
                 status: FAILURE
                 errors:
-                - code: ERR-156
-                  message: "A creditor with same external reference id already exists"
+                - code: ERR-###
+                  message: <error message>
                 traceId: fe57384d-9845-4242-9a20-5cdc2f485452
       parameters:
         - name: creditorId
@@ -5211,8 +5211,8 @@ paths:
               example:
                 status: FAILURE
                 errors:
-                - code: ERR-155
-                  message: "A bank account with same external reference id already exists."
+                - code: ERR-###
+                  message: <error message>
                 traceId: d3cad2af-4ceb-4057-9d01-f150b271c26c
       parameters:
         - name: creditorId
@@ -5652,8 +5652,8 @@ paths:
               example:
                 status: FAILURE
                 errors:
-                - code: ERR-155
-                  message: "A bank account with same external reference id already exists."
+                - code: ERR-###
+                  message: <error message>
                 traceId: b563a012-2bf0-4c1c-9bc2-33b587b6cb9d
       parameters:
         - name: creditorId
@@ -6143,17 +6143,14 @@ paths:
                   message: <error message>
                 traceId: 5138110e-7064-4717-93fe-e363ca3cefad
         '409':
-          description: Conflict — Enrollment externalReferenceId already exists.
+          description: Conflict — externalReferenceId already exists
           content:
             application/json:
               example:
                 status: FAILURE
-                errors:
-                - code: ERR-123
-                  message: "Enrollment externalReferenceId already exists."
-                  id: "a4d8e9c2-1f3a-4b6e-9d2c-7f8a1b3c5d7e"
-                  externalReferenceId: "ENR-2024-000099"
-                traceId: "5b2c8e9f-3a4d-4b1e-9c2d-7f8a1b3c5d7e"
+                code: EXTERNAL_REFERENCE_ID_EXISTS
+                message: An enrollment with this externalReferenceId already exists.
+                enrollmentId: ENR-2024-000099
         '422':
           description: Unprocessable Entity — validation failed
           content:
@@ -6724,8 +6721,8 @@ paths:
               example:
                 status: FAILURE
                 errors:
-                - code: ERR-123
-                  message: "Enrollment externalReferenceId already exists."
+                - code: ERR-###
+                  message: <error message>
                 traceId: ac396a3d-b916-4aea-9869-a42c84aedffe
         '400':
           description: Malformed request body
@@ -7292,17 +7289,14 @@ paths:
                   message: <error message>
                 traceId: 6bf4f26b-94a1-4c82-9411-2d66e2f88b14
         '409':
-          description: Conflict — Enrollment externalReferenceId already exists.
+          description: Conflict — externalReferenceId already exists
           content:
             application/json:
               example:
                 status: FAILURE
-                errors:
-                - code: ERR-123
-                  message: "Enrollment externalReferenceId already exists."
-                  id: "a4d8e9c2-1f3a-4b6e-9d2c-7f8a1b3c5d7e"
-                  externalReferenceId: "ENR-2024-000099"
-                traceId: "9c1d4e7a-2b3f-4a8d-9e1c-6f5b3a2d8c4e"
+                code: EXTERNAL_REFERENCE_ID_EXISTS
+                message: An enrollment with this externalReferenceId already exists.
+                enrollmentId: ENR-2024-000099
       requestBody:
         required: true
         content:
@@ -10512,8 +10506,8 @@ paths:
               example:
                 status: FAILURE
                 errors:
-                - code: ERR-41
-                  message: "Duplicate draft. Set acceptDuplicateFlag to YES to override."
+                - code: ERR-###
+                  message: <error message>
                 traceId: 9f2760cc-caab-4d19-93c3-127b7ace53e8
       parameters:
         - name: enrollmentId
@@ -11007,8 +11001,8 @@ paths:
               example:
                 status: FAILURE
                 errors:
-                - code: ERR-41
-                  message: "Duplicate draft. Set acceptDuplicateFlag to YES to override."
+                - code: ERR-###
+                  message: <error message>
                 traceId: 7d5d4a07-2c00-4826-9600-70aa8bf92395
         '422':
           description: Unprocessable Entity — draft not in SCHEDULED status
@@ -15154,6 +15148,16 @@ paths:
                 - code: ERR-###
                   message: <error message>
                 traceId: 98aa85f8-5bf8-417a-9328-0dde272c330b
+        '409':
+          description: Conflict — Payment not in an actionable state.
+          content:
+            application/json:
+              example:
+                status: FAILURE
+                errors:
+                - code: ERR-###
+                  message: <error message>
+                traceId: 846b85bf-49a4-4616-9997-c04c1e5ed8bd
         '422':
           description: Unprocessable Entity — business-rule validation failed.
           content:
@@ -15277,6 +15281,16 @@ paths:
                 - code: ERR-###
                   message: <error message>
                 traceId: 59396f5c-c97b-40d2-937d-fcbdc9d74a1c
+        '409':
+          description: Conflict — Payment not in an actionable state.
+          content:
+            application/json:
+              example:
+                status: FAILURE
+                errors:
+                - code: ERR-###
+                  message: <error message>
+                traceId: 2a00aaf6-1911-4ecb-9c1c-b335482e2324
         '422':
           description: Unprocessable Entity — business-rule validation failed.
           content:
@@ -17230,6 +17244,16 @@ paths:
                 - code: ERR-###
                   message: <error message>
                 traceId: 357d45b2-158d-4e04-9b04-efba26d61e31
+        '409':
+          description: Withdrawal not in a cancellable state.
+          content:
+            application/json:
+              example:
+                status: FAILURE
+                errors:
+                - code: ERR-###
+                  message: <error message>
+                traceId: 6e9f5a41-b6a9-4a32-9a90-b990cda266c4
         '404':
           description: Withdrawal not found under the specified enrollment.
           content:
@@ -17493,6 +17517,16 @@ paths:
                 - code: ERR-###
                   message: <error message>
                 traceId: 641fb63f-cefa-4ac6-92b8-b7d3d056da32
+        '409':
+          description: Withdrawal not in a stoppable state.
+          content:
+            application/json:
+              example:
+                status: FAILURE
+                errors:
+                - code: ERR-###
+                  message: <error message>
+                traceId: cba792b2-3e2e-439a-93e1-16e67940170c
         '404':
           description: Withdrawal not found under the specified enrollment.
           content:
@@ -19604,6 +19638,16 @@ paths:
                 - code: ERR-###
                   message: <error message>
                 traceId: 4a325f08-4e6b-4b10-99a8-251fadc139e9
+        '409':
+          description: Conflict — Refund not in an actionable state.
+          content:
+            application/json:
+              example:
+                status: FAILURE
+                errors:
+                - code: ERR-###
+                  message: <error message>
+                traceId: 499e9286-2205-4155-973c-0d63e6e693a7
         '422':
           description: Unprocessable Entity — business-rule validation failed.
           content:
@@ -20662,6 +20706,18 @@ paths:
                       by:
                         id: 5c2e1363-26f3-4175-48a9-b39d0d1cf4e5
                         name: Ops User
+        '409':
+          description: Invalid state transition. Returns the current status and existing exceptionId.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                status: FAILURE
+                errors:
+                - code: ERR-###
+                  message: <error message>
+                traceId: bb884973-4e2d-45a9-9e2b-d6be130ca855
   /api/v1/exceptions/{exceptionId}/verifyException:
     post:
       summary: Verify Exception
@@ -20735,6 +20791,18 @@ paths:
                       by:
                         id: 5c2e1363-26f3-4175-48a9-b39d0d1cf4e5
                         name: Ops User
+        '409':
+          description: Invalid state transition. Returns the current status and existing exceptionId.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                status: FAILURE
+                errors:
+                - code: ERR-###
+                  message: <error message>
+                traceId: ad1643db-4d40-492d-93f1-2fd591f08429
   /api/v1/exceptions/{exceptionId}/resolveException:
     post:
       summary: Resolve Exception
@@ -20810,6 +20878,18 @@ paths:
                       by:
                         id: 5c2e1363-26f3-4175-48a9-b39d0d1cf4e5
                         name: Ops User
+        '409':
+          description: Invalid state transition. Returns the current status and existing exceptionId.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                status: FAILURE
+                errors:
+                - code: ERR-###
+                  message: <error message>
+                traceId: b44b0f78-4baa-4896-943a-7b0063390492
   /api/v1/exceptions/{exceptionId}/notes:
     get:
       summary: List Exception Notes
@@ -21240,35 +21320,23 @@ components:
         - reasons
     ExceptionReason:
       type: object
-      description: A structured reason record attached to an exception describing the triggering event. Populated at creation; additional reasons may be appended via the appendReason action.
+      description: A structured reason record attached to an exception describing the triggering event. Populated at creation only.
       properties:
         reasonCode:
           type: string
-          description: Machine-readable reason code from the closed Reason Catalog.
-          example: DOCUMENT_VERIFICATION_FAILED
-        reasonDescription:
+          description: Machine-readable reason code.
+          example: CIP_FAILURE
+        reasonMessage:
           type: string
-          description: Human-readable description of this reason, suitable for surfacing in UI.
-          example: Government-issued ID failed verification — DOB and address do not match consumer record.
-        reasonDetails:
-          type: object
-          description: Structured supporting context for this reason. Shape varies by `reasonCode`. When the failure relates to specific fields, `fieldsToReview` is a simple array of field names that need review.
-          additionalProperties: true
-          example:
-            documentId: doc_5a4b3c2d-1e9f-4a8b-b7c6-d5e4f3a2b1c0
-            documentType: GOVERNMENT_ISSUED_PHOTO_ID
-            fieldsToReview:
-              - dateOfBirth
-              - addressLine1
-              - expirationDate
-        requiresContact:
-          type: boolean
-          description: Indicates that resolving this reason requires the subscriber to contact the consumer (e.g. to collect a corrected document, re-verify identity, or re-authorize a bank account).
-          default: false
-          example: true
+          description: Human-readable summary suitable for surfacing in UI.
+          example: CIP failure; update consumer
+        reasonData:
+          type: string
+          description: Free-text supporting context for this reason (e.g. failed fields, provider names, IDs). Shape varies by `reasonCode`; serialize structured payloads as a string.
+          example: 'consumerId=b2e4d9c3-8c5f-4d7b-ae6a-1f9c3d2b4e58; failedFields=ssn,dateOfBirth; provider=LexisNexis; score=42'
       required:
         - reasonCode
-        - reasonDescription
+        - reasonMessage
     ExceptionResolution:
       type: object
       description: Resolution metadata. Populated only when `status = RESOLVED`.

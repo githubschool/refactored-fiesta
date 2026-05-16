@@ -15,3 +15,6 @@
 - Main Street
 - Apple Campus
 - library
+- Taj Mahal
+- My house
+- parks
